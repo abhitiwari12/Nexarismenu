@@ -1,0 +1,36 @@
+<svg viewBox="0 0 350 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="badge-bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1d4ed8" /> <!-- blue-700 -->
+      <stop offset="50%" stop-color="#2563eb" /> <!-- blue-600 -->
+      <stop offset="100%" stop-color="#38bdf8" /> <!-- sky-400 -->
+    </linearGradient>
+    <linearGradient id="text-bg-dark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" /> <!-- white -->
+      <stop offset="50%" stop-color="#bae6fd" /> <!-- sky-200 -->
+      <stop offset="100%" stop-color="#bfdbfe" /> <!-- blue-200 -->
+    </linearGradient>
+  </defs>
+
+  <!-- Badge Background -->
+  <rect x="0" y="12" width="56" height="56" rx="16" fill="url(#badge-bg)" />
+  
+  <!-- Star Icon inside Badge -->
+  <g transform="translate(12, 24) scale(0.32)">
+    <path fill="#ffffff" d="M 50 5 C 51.5 -1.5 54.5 -1.5 56 5 L 61 28 L 81.8 19.4 C 88 16.8 91 21 88.5 27 L 79.9 47.8 L 103 52.8 C 109.5 54.3 109.5 57.3 103 58.8 L 79.9 63.8 L 88.5 84.6 C 91 90.6 88 94.8 81.8 92.2 L 61 83.6 L 56 106.6 C 54.5 113.1 51.5 113.1 50 106.6 L 45 83.6 L 24.2 92.2 C 18 94.8 15 90.6 17.5 84.6 L 26.1 63.8 L 3 58.8 C -3.5 57.3 -3.5 54.3 3 52.8 L 26.1 47.8 L 17.5 27 C 15 21 18 16.8 24.2 19.4 L 45 28 Z" />
+  </g>
+
+  <!-- Text Group -->
+  <g transform="translate(68, 0)">
+    <!-- Brand Name -->
+    <text x="0" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34" font-weight="900" fill="url(#text-bg-dark)" letter-spacing="-1.5">Nexarıs</text>
+    
+    <!-- Star over 'i' -->
+    <g transform="translate(94, 22) scale(0.12)">
+      <path fill="url(#text-bg-dark)" d="M 50 5 C 51.5 -1.5 54.5 -1.5 56 5 L 61 28 L 81.8 19.4 C 88 16.8 91 21 88.5 27 L 79.9 47.8 L 103 52.8 C 109.5 54.3 109.5 57.3 103 58.8 L 79.9 63.8 L 88.5 84.6 C 91 90.6 88 94.8 81.8 92.2 L 61 83.6 L 56 106.6 C 54.5 113.1 51.5 113.1 50 106.6 L 45 83.6 L 24.2 92.2 C 18 94.8 15 90.6 17.5 84.6 L 26.1 63.8 L 3 58.8 C -3.5 57.3 -3.5 54.3 3 52.8 L 26.1 47.8 L 17.5 27 C 15 21 18 16.8 24.2 19.4 L 45 28 Z" />
+    </g>
+
+    <!-- Tagline -->
+    <text x="0" y="64" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#94a3b8" letter-spacing="-0.2">One partner. Endless possibilities.</text>
+  </g>
+</svg>

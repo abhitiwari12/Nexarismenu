@@ -1,0 +1,137 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account for authentication, role, and status",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "restaurant"] },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "restaurantId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "status", "createdAt"]
+    },
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "Restaurant profile, branding, custom domain, and contact details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerUid": { "type": "string" },
+        "restaurantName": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "slug": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "coverUrl": { "type": "string" },
+        "customDomain": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "ownerUid", "restaurantName", "slug", "createdAt"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Menu category for a restaurant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "name": { "type": "string" },
+        "displayOrder": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "restaurantId", "name", "createdAt"]
+    },
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "Food and drink dishes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "isVeg": { "type": "boolean" },
+        "isAvailable": { "type": "boolean" },
+        "displayOrder": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "restaurantId", "categoryId", "name", "price", "createdAt"]
+    },
+    "MenuView": {
+      "title": "MenuView",
+      "description": "Public menu page view logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "slug": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "userAgent": { "type": "string" },
+        "referrer": { "type": "string" }
+      },
+      "required": ["id", "restaurantId", "slug", "timestamp"]
+    },
+    "QrScan": {
+      "title": "QrScan",
+      "description": "QR code scan event logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "slug": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "userAgent": { "type": "string" }
+      },
+      "required": ["id", "restaurantId", "slug", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Users authentication, status, and role"
+    },
+    "/restaurants/{restaurantId}": {
+      "schema": { "$ref": "#/entities/Restaurant" },
+      "description": "Restaurant profile, slug, and details"
+    },
+    "/restaurant_profiles/{profileId}": {
+      "schema": { "$ref": "#/entities/Restaurant" },
+      "description": "Legacy compatibility restaurant profiles"
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Menu categories"
+    },
+    "/menu_items/{itemId}": {
+      "schema": { "$ref": "#/entities/MenuItem" },
+      "description": "Menu dishes and drinks"
+    },
+    "/menu_views/{viewId}": {
+      "schema": { "$ref": "#/entities/MenuView" },
+      "description": "Menu page visit logs"
+    },
+    "/qr_scans/{scanId}": {
+      "schema": { "$ref": "#/entities/QrScan" },
+      "description": "QR code scan logs"
+    },
+    "/subscriptions/{id}": { "description": "Future subscription records" },
+    "/plans/{id}": { "description": "Future pricing plans" },
+    "/analytics/{id}": { "description": "Future aggregated analytics" },
+    "/domains/{id}": { "description": "Future custom domain configurations" },
+    "/staff/{id}": { "description": "Future staff member accounts" },
+    "/orders/{id}": { "description": "Future digital table ordering" },
+    "/tables/{id}": { "description": "Future table & QR mapping" }
+  }
+}

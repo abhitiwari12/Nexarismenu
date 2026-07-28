@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: nexaris_postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: nexaris_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nexaris_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nexaris-menu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nexaris_menu_app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - JWT_SECRET=nexaris_production_jwt_secret_key_2026
+      - DATABASE_URL=postgresql://postgres:postgrespassword@postgres-db:5432/nexaris_db
+      - PGHOST=postgres-db
+      - PGPORT=5432
+      - PGDATABASE=nexaris_db
+      - PGUSER=postgres
+      - PGPASSWORD=postgrespassword
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+      - CLOUDINARY_UPLOAD_PRESET=${CLOUDINARY_UPLOAD_PRESET}
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    volumes:
+      - nexaris_data:/app/data
+    restart: always
+
+volumes:
+  nexaris_data:
+    driver: local
+  pgdata:
+    driver: local
